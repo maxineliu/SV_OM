@@ -1,0 +1,97 @@
+#include <iostream>
+#include <fstream>
+#include <sstream>
+#include <string>
+#include <cmath>
+
+using namespace std;
+
+class Locus {
+public:
+	int index;
+	string chrom;
+	int POS;
+	int nAllele;
+	int nChrom;
+	double allele1FREQ;
+	double allele2FREQ;
+	int allele1;
+	int allele2;
+};
+
+//Overloads operator ">>" to make C++ understand how to read the object contents from a line
+std::istream& operator>>(std::istream& is, Locus& locus){
+	is >> locus.chrom >> locus.POS >> locus.nAllele >> locus.nChrom >> locus.allele1FREQ >> locus.allele2FREQ;
+	return is;
+};
+
+
+//Overloads operator "<<" to make C++ understand how to print the object contents
+std::ostream& operator<<(std::ostream& os, const Locus& locus) {
+	os << locus.index << "\t";
+	os << locus.nChrom << "\t";
+	os << "2" << "\t";
+	os << locus.allele1 << "\t";
+	os << locus.allele2;
+	return os;
+};
+
+int main(int argc, char *argv[]) {
+	std::ifstream in1 ("12bufo.filtered.INS.group1.freq.frq");
+	std::ifstream in2 ("12bufo.filtered.INS.group2.freq.frq");
+	std::ofstream out ("SNPs.txt");
+	std::ofstream err ("SNPs_err.txt");
+	if (!in1.is_open() || !in2.is_open() ){
+		std::cout << "Input file was not opened" << std::endl;
+		exit(1);
+	}
+	if (!out.is_open()){
+		std::cerr << "Output file was not opened" << std::endl;
+		exit(1);
+	}
+	
+	out << "[loci]=1282325" << std::endl;
+	out << "" << std::endl;
+	out << "[populations]=2" << std::endl;
+	out << "" << std::endl;
+	out << "[pop]=1" << std::endl;
+	
+	std::string line;
+	Locus myLocus;
+	int indexCounter = 0; // max value 2147483647
+	
+	std::getline(in1, line); //Discards header
+	while (std::getline(in1, line)) {
+		std::istringstream is(line);
+		if(!(is >> myLocus)){
+			std::cerr << "Error on line: " << line; 
+		}
+		if(myLocus.nChrom == 0){
+			err << "chrom number wrong on index " << myLocus.index << ": "<< line << std::endl;
+		}
+		myLocus.index = ++indexCounter;
+		myLocus.allele1 = round(myLocus.allele1FREQ * myLocus.nChrom);
+		myLocus.allele2 = round(myLocus.allele2FREQ * myLocus.nChrom);
+		out << myLocus << std::endl;
+	}
+	
+	out << "" << std::endl;
+	out << "[pop]=2" << std::endl;
+	indexCounter = 0;
+	
+	std::getline(in2, line); //Discards header
+	while (std::getline(in2, line)) {
+		std::istringstream is(line);
+		if(!(is >> myLocus)){
+			std::cerr << "Error on line: " << line; 
+		}
+		if(myLocus.nChrom == 0){
+			err << "chrom number wrong on index " << myLocus.index << ": "<< line << std::endl;
+		}
+		myLocus.index = ++indexCounter;
+		myLocus.allele1 = round(myLocus.allele1FREQ * myLocus.nChrom);
+		myLocus.allele2 = round(myLocus.allele2FREQ * myLocus.nChrom);
+		out << myLocus << std::endl;
+	}
+	return 0;
+}
