@@ -24,7 +24,7 @@ Output: 12bufo.INS.filted.vcf
 #### 3.BayescanFormat.sh
 Usage ./bayescanFormat.sh <filted vcf> <group number> 
 
-nested function: **freq2bayescan** (compiled from freq2bayescan.cppz)
+nested function: **freq2bayescan** (compiled from freq2bayescan.cpp)
 
 For example, ./bayescanFormat.sh 12bufo.INS.filted.vcf 2
 

@@ -33,24 +33,24 @@ std::istream& operator>>(std::istream& is, Locus& locus){
 std::ostream& operator<<(std::ostream& os, const Locus& locus) {
 	os << locus.index << "\t";
 	os << locus.nChrom << "\t";
-	os << "2" << "\t"; //magic number
+	os << "2" << "\t"; //fixed number for this project
 	os << locus.allele1 << "\t";
 	os << locus.allele2;
 	return os;
 };
 
 int main(int argc, char *argv[]) {
-	// get output file name root from input file name like "xxx.gp1.frq" or ".../.../xxx.gp1.frq" 
+	// get output file name root from input file name like "xxx.gp1.frq" or ".../.../xxx.gp1.frq"
+	string ext = ".gp1.frq";
 	string fileName =  argv[1];
-	// find the index of the last '/'
 	int begin = fileName.find_last_of('/') + 1;
-	int len = fileName.size() - begin - 8; // 8 is length of '.gp1.frq'
+	int len = fileName.size() - begin - ext.size(); 
 	fileName = fileName.substr(begin, len);
 //	std::cout << fileName << std::endl;
 	
 	// pre output file and error file
-	std::ofstream outPre (fileName + ".pre.out");
-	std::ofstream err (fileName + ".err");
+	std::ofstream outPre (fileName + ".data");
+	std::ofstream err (fileName + ".bayescan.err");
 	if (!outPre.is_open()){
 		std::cerr << "Output file was not opened." << std::endl;
 		exit(1);
@@ -101,8 +101,8 @@ int main(int argc, char *argv[]) {
 	outPre.close();
 	
 	// packing output file
-	std::ifstream data (fileName + ".pre.out");
-	std::ofstream out (fileName + ".out");
+	std::ifstream data (fileName + ".data");
+	std::ofstream out (fileName + ".bayescan");
 	if (!data.is_open()){
 		std::cout << "Data file was not opened." << std::endl;
 		exit(1);
@@ -119,7 +119,7 @@ int main(int argc, char *argv[]) {
 	out.close();
 	data.close();
 	
-	std:remove((fileName + ".pre.out").c_str());
+	std:remove((fileName + ".data").c_str());
 	
 	return 0;
 }
