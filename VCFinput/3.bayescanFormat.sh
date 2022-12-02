@@ -7,10 +7,10 @@ filename=`basename $1 .vcf`
 
 if [ $# -lt 2 ]; then
     echo "Command is error. Usage: ./bayescanFormat.sh <filted vcf> <group number>"
-fi
+else
 
 ## Step 1: Slipt VCF by groups and generate "vcftools -freq2" output
-for i in {1..$2}
+for ((i = 1; i <= $2; i++))
 do
 bcftools view -S group$i $1 -o $filename.gp$i.vcf
 vcftools --vcf $filename.gp$i.vcf --freq2 --out $filename.gp$i # output are "$vcf_file.gp$i.frq" and a log file with same prefix
@@ -18,4 +18,11 @@ done
 
 ## Step 2: convert frq file to bayescan input format
 # freq2bayescan is coded by c++. Usage: 
-./
+for ((i = 1; i <= $2; i++))
+do
+arg=$arg" $filename.gp$i.frq"
+done
+
+./freq2bayescan $arg 
+
+fi
