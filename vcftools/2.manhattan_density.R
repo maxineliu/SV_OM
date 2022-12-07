@@ -16,6 +16,9 @@ library(dplyr)
 # Setting variables
 input_F <- "/Users/maxineliu/work/bufo/outlier_methods/VCFtools/results_plots/12bufo.DUP.filtered.weir.fst" #fst file
 input_ID <- "/Users/maxineliu/work/bufo/outlier_methods/VCFtools/results_plots/12bufo.DUP.filtered_ID.txt" # ID list
+# cutoff in line 36
+# n in line 38
+# file name in line 40
 ################################
 
 data_F <- read.table(input_F, header = T);
