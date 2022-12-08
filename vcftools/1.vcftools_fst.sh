@@ -1,9 +1,9 @@
 #! /bin/bash
 # This script is used to calculate an Fst estimate from Weir and Cockerham’s 1984 paper using vcftools. Running this script needs files listed as: 1) The VCF 2) group file per group
 # setting varibles
-IP_VCF=/Users/maxineliu/work/bufo/VCF_files/dup/12bufo.DUP.filtered.vcf
+IP_VCF=/Users/maxineliu/work/bufo/VCF_files/ins/12bufo.INS.filtered.vcf
 GP_NUM=2
-GP1_F=/Users/maxineliu/work/GitHub/SV_OM/VCFinput/group1
+GP1_F=/Users/maxineliu/work/bufo/VCF_files/group1
 ######################################
 
 OP_suffix=`basename $IP_VCF .vcf`
