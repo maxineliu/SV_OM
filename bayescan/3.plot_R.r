@@ -62,11 +62,19 @@
 # > boa.hpd(mydata[[parameter]],0.05)
 
 library(dplyr)
-df <- read.table("/Users/maxineliu/work/bufo/outlier_methods/bayescan.dir/res_bayescan/12bufo.DUP.filtered_pr10_fst.txt")
-# outlier <- df %>% slice_min(qval, n=1) #return rows with the 100 minimum qvals
-outlier=as.integer(row.names(df[df[,3]<=FDR,]))
+
+#setting variables
+FDR=0.6
+Fst_bayescan <- read.table("/Users/maxineliu/work/bufo/outlier_methods/bayescan.dir/output_bayescan/12bufo.DUP.filtered_pr10_fst.txt")
+ID_vcf <- read.table("/Users/maxineliu/work/bufo/outlier_methods/bayescan.dir/12bufo.DUP.filtered_ID.txt", col.names = c("ID"))
+##############
+
+df <- data.frame(ID_vcf, Fst_bayescan)
+outlier <- df %>% slice_min(qval, n=1) #return rows with the 100 minimum qvals
+# outlier <- df[df$qval <= FDR,]
+nrow(outlier) #oulier个数
 index_outlier <- as.numeric(rownames(outlier)) #this list could be passed to plot_bayescan function as parameter "highlight"
-write(index_outlier, file = "/Users/maxineliu/work/bufo/outlier_methods/bayescan.dir/results_plots/12bufo.DUP.filtered.bayescan.pr10.outlier.index", sep = "\n") # used to extract outlier records from VCF
+write(outlier[, 1], file = "/Users/maxineliu/work/bufo/outlier_methods/bayescan.dir/12bufo.DUP.filtered.bayescan.pr10.outlier.id", sep = "\n") # used to extract outlier records from VCF
 
 plot_bayescan<-function(res,FDR=0.05,size=1,pos=0.35,highlight=NULL,name_highlighted=F,add_text=T)
 {
