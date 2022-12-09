@@ -2,3 +2,7 @@
 .DS_Store
 .Rhistory
 bayescan/.RData
+VCFinput/12bufo.INS.filtered.bed
+VCFinput/12bufo.INS.filtered.bim
+VCFinput/12bufo.INS.filtered.fam
+VCFinput/12bufo.INS.filtered.log
