@@ -9,7 +9,7 @@ library(dplyr)
 # path_to_file <- system.file("extdata", "geno3pops.bed", package = "pcadapt")
 # filename <- read.pcadapt(path_to_file, type = "bed")
 # setting variables
-path_to_file <- "/Users/maxineliu/work/bufo/VCF_files/ins/12bufo.INS.filtered.bed"
+path_to_file <- "/Users/maxineliu/work/bufo/VCF_files/dup/12bufo.DUP.filtered.bed"
 ###########################
 filename <- read.pcadapt(path_to_file, type = "bed")
 
@@ -59,7 +59,7 @@ for (i in 1:2)
 
 # Step 5: Perform PCA with optimal LD parameters and K value
 # res <- pcadapt(filename, K = 2, LD.clumping = list(size = 200, thr = 0.1))
-res <- pcadapt(filename, K = 1)
+res <- pcadapt(filename, K = 2)
 
 # Step 6: Multiple comparisons adjustment
 # To provide a list of outliers and choose a cutoff for outlier detection, there are three methods that are listed below from the less conservative one to the more conservative one.
@@ -86,14 +86,14 @@ length(which(padj <= alpha)) # number of outliers
 plot(res , option = "manhattan") # pcadapt内置
 
 
-# system("vcffile=/Users/maxineliu/work/bufo/VCF_files/ins/12bufo.INS.filtered.vcf")
+system("vcffile=/Users/maxineliu/work/bufo/VCF_files/dup/12bufo.DUP.filtered.vcf")
 # system("bcftools query -f '%ID\t%CHROM\t%POS\n' $vcffile > ${TMPDIR}out.tsv")
 # 以上两条,未知原因在r中无法成功运行,自行复制去terminal
 ManData <- read.table("/var/folders/b0/5wlh4ctx5ln29qw23gtf3gch0000gn/T/out.tsv", header = F, col.names = c("ID", "CHR", "POS"))
 ManData$Qval <- padj
 ManData <- ManData[complete.cases(ManData),]
 
-write.table(arrange(ManData[ManData$Qval<= alpha,], Qval), file = "/Users/maxineliu/work/bufo/outlier_methods/Sniffles/pcadapt/12bufo.INS.filtered.outlier.qval.txt", sep = "\t", eol = "\n", row.names = F, quote = F)
+write.table(arrange(ManData[ManData$Qval<= alpha,], Qval), file = "/Users/maxineliu/work/bufo/outlier_methods/Sniffles/pcadapt/12bufo.DUP.filtered.outlier.qval.txt", sep = "\t", eol = "\n", row.names = F, quote = F)
 
 ManData$log10.q <- -log10(ManData$Qval)
 ManData <- ManData[,-4]

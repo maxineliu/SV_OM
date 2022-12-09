@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # Setting variables
-OUTLIER_Q=/Users/maxineliu/work/bufo/outlier_methods/Sniffles/pcadapt/12bufo.INS.filtered.outlier.qval.txt
-IP_VCF=/Users/maxineliu/work/bufo/VCF_files/ins/12bufo.INS.filtered.vcf
+OUTLIER_Q=/Users/maxineliu/work/bufo/outlier_methods/Sniffles/pcadapt/12bufo.DUP.filtered.outlier.qval.txt
+IP_VCF=/Users/maxineliu/work/bufo/VCF_files/dup/12bufo.DUP.filtered.vcf
 #######################################
 OP_prefix=`basename $IP_VCF .vcf`
 
