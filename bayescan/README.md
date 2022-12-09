@@ -1,6 +1,7 @@
 # README.md
 ## The flow
-**bayescan format input** ➡️ 1.bayescan.sh (on cluster) + 2.vcf_id.sh ➡️ **\*_fst.txt + SV IDs list** ➡️ 3.plot_R.r ➡️ **fst-q plot, outliers id** ➡️ 3.outlierVCF.sh ➡️ ***.outlier.vcf**
+**bayescan format input** ➡️ 1.bayescan.sh (on cluster) + 2.vcf_id.sh ➡️ **\*_fst.txt + SV IDs list** ➡️ 3.plot_R.r ➡️ **fst-q plot, ouliers fst list** 
+**outliers id** ➡️ 3.outlierVCF.sh ➡️ ***.outlier.vcf**
 ## 1.bayescan.sh
 `bayescan.sh` is a slurm script for running bayescan to detect outliers against population whole genome SVs dataset. 
 

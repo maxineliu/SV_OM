@@ -65,8 +65,8 @@ library(dplyr)
 
 #setting variables
 FDR=0.6
-Fst_bayescan <- read.table("/Users/maxineliu/work/bufo/outlier_methods/bayescan.dir/output_bayescan/12bufo.DUP.filtered_pr10_fst.txt")
-ID_vcf <- read.table("/Users/maxineliu/work/bufo/outlier_methods/bayescan.dir/12bufo.DUP.filtered_ID.txt", col.names = c("ID"))
+Fst_bayescan <- read.table("/Users/maxineliu/work/bufo/outlier_methods/Sniffles/bayescan.dir/output_bayescan/12bufo.DUP.filtered_pr10_fst.txt")
+ID_vcf <- read.table("/Users/maxineliu/work/bufo/outlier_methods/Sniffles/bayescan.dir/results_plots/12bufo.DUP.filtered_ID.txt", col.names = c("ID"))
 ##############
 
 df <- data.frame(ID_vcf, Fst_bayescan)
