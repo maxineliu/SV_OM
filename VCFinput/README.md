@@ -1,7 +1,7 @@
 # README.md
 **VCFinput folder** includes scripts and groupN example that involve in the procedure of generating input files for outlier methods(pcadapt, bayescan, vcftools for now)
 ## The flow 
-**Original VCF (from variants caller)** ➡️ 1.subsetBYtype.sh ➡️ **VCF subsets** ➡️ 2.filteringVCF.sh ➡️ **filted VCF** ➡️ 3.BayescanFormat.sh ➡️ **bayesscan format input files**
+**Original VCF (from variants caller)** ➡️ 1.subsetBYtype.sh ➡️ **VCF subsets** ➡️ 2.filteringVCF.sh ➡️ **filted VCF** ➡️ 3.BayescanFormat.sh/4.vcf2bed ➡️ **bayesscan format input files/pcadapt bed file**
 
 ## Arguments/Usages of scripts
 ### 1.subsetBYtype.sh
@@ -28,3 +28,6 @@ For example, ./bayescanFormat.sh 12bufo.INS.filted.vcf 2
 Other files needed: group1 group2 ... groupN
 
 Output: 12bufo.INS.filted.bayescan
+
+### 4.vcf2bed.sh
+Usage ./vcf2bed.sh <*.filted.vcf>
