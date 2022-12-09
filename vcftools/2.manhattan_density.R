@@ -38,7 +38,7 @@ length(which(Fst$val > cutoff)) #outlier个数
 outlier <- Fst %>% slice_max(val, n=14) #return rows with the biggest N Fst
 ID_outlier <- outlier[,1]
 write(ID_outlier, file = "/Users/maxineliu/work/bufo/outlier_methods/VCFtools/12bufo.DUP.filtered.outlier.id", sep = "\n") # extract outlier records from VCF
-
+write.table(outlier, file = "/Users/maxineliu/work/bufo/outlier_methods/VCFtools/12bufo.DUP.filtered.outlier.weir.fst", sep = "\t", eol = "\n")
 chr_name <- c("NC_058080.1", "NC_058081.1", "NC_058082.1", "NC_058083.1", "NC_058084.1", "NC_058085.1", "NC_058086.1", "NC_058087.1", "NC_058088.1", "NC_058089.1", "NC_058090.1", "NC_008410.1")
 # subset <- c("Fst1",	"Fst2",	"Fst3",	"Fst4",	"Fst5", "Fst6", "Fst7", "Fst8", "Fst9", "Fst10", "Fst11", "FstMito")
 
