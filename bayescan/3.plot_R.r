@@ -75,7 +75,7 @@ outlier <- df %>% slice_min(qval, n=1) #return rows with the 100 minimum qvals
 nrow(outlier) #oulier个数
 index_outlier <- as.numeric(rownames(outlier)) #this list could be passed to plot_bayescan function as parameter "highlight"
 write(outlier[, 1], file = "/Users/maxineliu/work/bufo/outlier_methods/bayescan.dir/12bufo.DUP.filtered.bayescan.pr10.outlier.id", sep = "\n") # used to extract outlier records from VCF
-write.table(outlier, file = "/Users/maxineliu/work/bufo/outlier_methods/Sniffles/bayescan.dir/results_plots/112bufo.DUP.filtered_pr10_outlier_fst.txt", sep = "\t", eol = "\n")
+write.table(arrange(outlier, qval), file = "/Users/maxineliu/work/bufo/outlier_methods/Sniffles/bayescan.dir/results_plots/12bufo.DUP.filtered_pr10_outlier_fst.txt", sep = "\t", eol = "\n", row.names = F, quote = F)
 plot_bayescan<-function(res,FDR=0.05,size=1,pos=0.35,highlight=NULL,name_highlighted=F,add_text=T)
 {
 if (is.character(res))
